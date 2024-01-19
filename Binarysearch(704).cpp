@@ -6,7 +6,7 @@ public:
         int end=length-1;
 
         while(start<=end){
-            int middle=(start+end)/2;
+            int middle=start+(end-start)/2;
             if(key==array[middle]){
                 return middle;
             }
