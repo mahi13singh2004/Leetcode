@@ -32,3 +32,9 @@ public:
         }
     }
 };
+
+//MORE OPTIMAL
+//D=D%N;
+//reverse(array.begin(),array.end());
+//reverse(array.begin(),array.begin()+D);
+//reverse(array.begin()+D,array.end());
