@@ -1,3 +1,19 @@
+//approach-1
+class Solution {
+public:
+    int missingNumber(vector<int>&array) {
+        sort(array.begin(),array.end());
+        for(int i=0; i<array.size(); i++){
+            if(array[i]!=i){
+                return i;
+            }
+        }
+        return array.size();   ///if all elements r there, return next element. 
+    }
+};
+
+
+//approach-2
 class Solution {
 public:
     int missingNumber(vector<int>& array) {
