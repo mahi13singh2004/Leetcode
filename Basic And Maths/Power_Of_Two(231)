@@ -1,0 +1,16 @@
+//In binary form no that are power of 2 have exactly one '1' in them and that also at last. All others are 0. 
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if(n<1){
+            return 0;
+        }
+        while(n!=1){
+            if(n%2!=0){
+                return false;
+            }
+            n=n/2;
+        }
+        return true;
+    }
+};
