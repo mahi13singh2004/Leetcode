@@ -1,0 +1,77 @@
+//BRUTE
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int sum=0;
+        int N=nums.size();
+        int ans1=0;
+        int ans2=0;
+        for(int i=0; i<N; i++){
+           for(int j=0; j<N; j++){
+            sum=nums[i]+nums[j];
+            if(sum==target && i!=j){
+                ans1=i;
+                ans2=j;
+                break;
+            }
+           }
+        }
+        vector<int>ans;
+        ans.push_back(ans1);
+        ans.push_back(ans2);
+        return ans;
+    }
+};
+
+//BETTER
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int>mpp;
+        int ans1=0;
+        int ans2=0;
+        int N=nums.size();
+        for(int i=0; i<N; i++){
+            int num=nums[i];
+            int need=target-nums[i];
+            if(mpp.find(need)!=mpp.end()){
+                ans1=i;
+                ans2=mpp[need];
+                break;
+            }
+            mpp[num]=i;
+        }
+        vector<int>ans;
+        ans.push_back(ans1);
+        ans.push_back(ans2);
+        return ans;
+    }
+};
+
+//OPTIMAL
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        vector<int>ans;
+        int sum=0;
+        int left=0;
+        int N=nums.size();
+        int right=N-1;
+        while(left<right){
+            sum=nums[left]+nums[right];
+            if(sum==target){
+                ans.push_back(left);
+                ans.push_back(right);
+                break;
+            }
+            else if(sum>target){
+                right--;
+            }
+            else{
+                left++;
+            }
+        }
+        return ans;
+    }
+};
