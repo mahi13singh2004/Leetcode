@@ -1,0 +1,64 @@
+//BRUTE
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int ans=0;
+        int count=0;
+        int N=nums.size();
+        for(int i=0; i<N; i++){
+            count=0;
+            for(int j=0; j<N; j++){
+                if(nums[i]==nums[j]){
+                    count++;
+                }
+            }
+            if(count>(N/2)){
+                return nums[i];
+                break;
+            }
+        }
+        return 1;
+    }
+};
+
+//BETTER
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        map<int,int>mpp;
+        int N=nums.size();
+        for(int i=0; i<N; i++){
+            mpp[nums[i]]++;
+        }
+
+        for(auto it=mpp.begin(); it!=mpp.end(); it++){
+            if(it->second>(N/2)){
+                return it->first;
+            }
+        }
+        return 1;
+    }
+};
+
+//BEST
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int count=0;
+        int ele=0;
+        int N=nums.size();
+        for(int i=0; i<N; i++){
+            if(count==0){
+                ele=nums[i];
+                count=1;
+            }
+            else if(nums[i]==ele){
+                count++;
+            }
+            else{
+                count--;
+            }
+        }
+        return ele;
+    }
+};
