@@ -1,0 +1,35 @@
+//BRUTE
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int ans=INT_MIN;
+        int N=nums.size();
+        for(int i=0; i<N; i++){
+            int sum=0;
+            for(int j=i; j<N; j++){
+                sum=sum+nums[j];
+                ans=max(ans,sum);
+            }
+        }
+        return ans;
+    }
+};
+
+//OPTIMAL
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int sum=0;
+        int maxi=INT_MIN;
+        int N=nums.size();
+        for(int i=0; i<N; i++){
+            sum=sum+nums[i];
+            maxi=max(maxi,sum);
+            if(sum<0){
+                sum=0;
+            }
+        }
+
+        return maxi;
+    }
+};
