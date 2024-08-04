@@ -1,0 +1,88 @@
+//BRUTE
+class Solution {
+public:
+    
+    bool ls(vector<int>a, int n){
+        bool flag=false;
+        for(int i=0; i<a.size(); i++){
+            if(a[i]==n){
+                flag=true;
+                break;
+            }
+        }
+        return flag;
+    }
+    
+    int longestConsecutive(vector<int>& nums) {
+        int N=nums.size();
+        int count=0;
+        int longest=0;
+        for(int i=0; i<N; i++){
+            longest=1;
+            int ele=nums[i];
+            while(ls(nums,ele+1)==true){
+                ele++;
+                longest++;
+            }
+            count=max(count,longest);
+        }
+        return count;
+    }
+};
+
+//BETTER
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int N=nums.size();
+        if(N==0){
+            return 0;
+        }
+        int count=0;
+        int longest=1;
+        int smallest=INT_MIN;
+        for(int i=0; i<N; i++){
+            if((nums[i]-1)==smallest){
+                count++;
+                smallest=nums[i];
+            }
+            else if(nums[i]!=smallest){
+                count=1;
+                smallest=nums[i];
+            }
+            longest=max(longest,count);
+        }
+        return longest;
+    }
+};
+
+//OPTIMAL
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        int N=nums.size();
+        if(N==0){
+            return 0;
+        }
+        int longest=1;
+        unordered_set<int>st;
+
+        for(int i=0; i<N; i++){
+            st.insert(nums[i]);
+        }
+
+        for(auto it:st){
+            if(st.find(it-1)==st.end()){
+                int count=1;
+                int ele=it;
+                while(st.find(ele+1)!=st.end()){
+                    count++;
+                    ele++;
+                }
+                longest=max(longest,count);
+            }
+        }
+        return longest;
+    }
+};
