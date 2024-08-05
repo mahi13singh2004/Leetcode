@@ -1,0 +1,27 @@
+class Solution {
+public:
+
+    vector<int>find(int R){
+        long long ans=1;
+        vector<int>res;
+        res.push_back(1);
+
+        for(int C=1; C<R; C++){
+            ans=ans*(R-C);
+            ans=ans/C;
+            res.push_back(ans);
+        }
+        return res;
+    }
+
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>>res;
+
+        int R=numRows;
+
+        for(int i=1; i<=R; i++){
+            res.push_back(find(i));
+        }
+        return res;
+    }
+};
